@@ -14,7 +14,12 @@ Feature: Login
   
   Example: User logs in.
 
-viewList.feature-
+Feature: View List
+
+  The view list feature allows the user to see their list of tasks they have created in the application. 
+  These tasks are account-specific.
+  
+  Example: User opens the tasks list and the application displays their personal tasks.
 
 
 Feature: Clock In/Out
