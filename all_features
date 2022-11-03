@@ -26,4 +26,10 @@ Feature: Clock In/Out
   
   Example: User clocks in or out
 
-viewTask.feature-
+Feature: View Task
+
+  The view task feature allows the user to (once logged in) click and 
+  view a tasks name and details.
+
+  Example: User clicks on a task from the task list to view the details of it.
+
