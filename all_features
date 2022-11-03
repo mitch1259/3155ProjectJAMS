@@ -7,7 +7,12 @@ Feature: Guess the word
 
   Example: Maker starts a game
 
-login.feature-
+Feature: Login
+
+  The login feature allows the user to login and view/edit their 
+  personal tasks/projects as well as access any additional options specific to their account.
+  
+  Example: User logs in.
 
 viewList.feature-
 
