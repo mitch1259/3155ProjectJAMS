@@ -3,7 +3,10 @@ Feature: Login
   The login feature allows the user to login and view/edit their 
   personal tasks/projects as well as access any additional options specific to their account.
   
-  Example: User logs in.
+  Example: Given a user has filled in the login text boxes with their login credentials,
+           When the user selects the login button,
+           And the login credentials are correct,
+           Then the system will log the user into their respective account.
 
 Feature: View List
 
@@ -33,5 +36,7 @@ Feature: View Task
   and the task list loads successfully for that specific user,
   then they should be able to view their individual tasks on the application.
 
-  Example: User clicks on a task from the task list to view the details of it.
-
+  Example: Given a user is viewing their task list,
+           When the user selects on a certain task,
+           And they are allowed to view that task,
+           Then the system will show them the task and its details.
