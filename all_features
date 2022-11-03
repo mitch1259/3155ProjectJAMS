@@ -10,10 +10,8 @@ Feature: Login
 
 Feature: View List
 
-  The view list feature allows the user to see their list of tasks they have created in the application.
-  These tasks are account-specific. If the user is authenticated successfully, they access the task list page, 
-  and the task list loads successfully for that specific user,
-  then they should be able to view their individual tasks on the application.
+  The view list feature allows the user to see their list of tasks they have created in the application. 
+  These tasks are account-specific.
   
   Example: Given a user is signed in
            When the user selects to view their task list,
