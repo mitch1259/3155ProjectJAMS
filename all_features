@@ -20,7 +20,10 @@ Feature: Clock In/Out
   can press so that they can clock in and out, which changes depending
   on their clock status.
   
-  Example: User clocks in or out
+  Example: Given a user is successfully logged in
+           And they are on the clock in/out page of their account
+           When they press the clock in/out button
+           Then they have their timesheet updated
 
 Feature: View Task
 
