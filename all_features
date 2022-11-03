@@ -28,8 +28,10 @@ Feature: Clock In/Out
 
 Feature: View Task
 
-  The view task feature allows the user to (once logged in) click and 
-  view a tasks name and details.
+  The view list feature allows the user to see their list of tasks they have created in the application.
+  These tasks are account-specific. If the user is authenticated successfully, they access the task list page, 
+  and the task list loads successfully for that specific user,
+  then they should be able to view their individual tasks on the application.
 
   Example: User clicks on a task from the task list to view the details of it.
 
