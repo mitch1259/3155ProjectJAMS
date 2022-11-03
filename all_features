@@ -14,8 +14,10 @@ Feature: View List
   These tasks are account-specific. If the user is authenticated successfully, they access the task list page, 
   and the task list loads successfully for that specific user,
   then they should be able to view their individual tasks on the application.
-  Example: User opens the tasks list and the application displays their personal tasks.
-
+  
+  Example: Given a user is signed in
+           When the user selects to view their task list,
+           Then they are displayed their list of tasks
 
 Feature: Clock In/Out
 
@@ -31,10 +33,8 @@ Feature: Clock In/Out
 
 Feature: View Task
 
-  The view list feature allows the user to see their list of tasks they have created in the application.
-  These tasks are account-specific. If the user is authenticated successfully, they access the task list page, 
-  and the task list loads successfully for that specific user,
-  then they should be able to view their individual tasks on the application.
+  The view task feature allows the user to (once logged in) click and 
+  view a tasks name and details.
 
   Example: Given a user is viewing their task list,
            When the user selects on a certain task,
