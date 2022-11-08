@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="JAMS Project Management">
+        <title>JAMS Project Management</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+        <!-- <nav>
+            <a href="{{ url_for('index') }}"> Home </a> ||
+            <a href="{{ url_for('get_notes') }}"> My Notes </a> ||
+            <a href="{{ url_for('new_note') }}">Add Note</a>
+        </nav> -->
+        <h1>Welcome {{user.name}} to the JAMS!</h1>
+
+        <h1>Project Details</h1>
+
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Details</th>
+                <th>Current Date</th>
+                <th>Deadline</th>
+            </tr>
+            <tr>
+                <td>{{ task.task }}</td>
+                <td>{{ task.details }}</td>
+                <td>{{ task.currentDate }}</td>
+                <td>{{ task.deadline }}</td>
+            </tr>
+        </table>
+    </body>
+</html>
