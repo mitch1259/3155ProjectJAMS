@@ -9,16 +9,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        <h1>Welcome {{user.name}} to JAMS!</h1>
+        <h2>You are currently clocked (in/out)</h2>
 
-        <h2>Information for all projects you are part of can be found here</h2>
-        <nav> <a href="/tasks"> Project 1 </a> </nav>
-        
-        <nav> <a href="/tasks"> Project 2 </a> </nav>
-
-        <nav> <a href="/tasks"> Project 3 </a> </nav>
-
-        <nav> <a href="/clock"> Clock In/Out </a> </nav>
-
+        <nav> <a href="/clock"> Start/Stop Clock </a> </nav>
     </body>
-</html>

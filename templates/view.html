@@ -9,11 +9,6 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        <!-- <nav>
-            <a href="{{ url_for('index') }}"> Home </a> ||
-            <a href="{{ url_for('get_notes') }}"> My Notes </a> ||
-            <a href="{{ url_for('new_note') }}">Add Note</a>
-        </nav> -->
         <h1>Welcome {{user.name}} to the JAMS!</h1>
 
         <h1>Project Details</h1>
@@ -25,12 +20,14 @@
                 <th>Current Date</th>
                 <th>Deadline</th>
             </tr>
+            {% for task in tasks %}
             <tr>
-                <td>{{ task.task }}</td>
-                <td>{{ task.details }}</td>
-                <td>{{ task.currentDate }}</td>
-                <td>{{ task.deadline }}</td>
+                <td>{{ tasks.Task }}</td>
+                <td>{{ tasks.Details }}</td>
+                <td>{{ tasks.CurrentDate }}</td>
+                <td>{{ tasks.Deadline }}</td>
             </tr>
+            {% endfor %}
         </table>
     </body>
 </html>
