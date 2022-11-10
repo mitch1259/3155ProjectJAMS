@@ -20,8 +20,8 @@
             </tr>
             {% for task in tasks %}
             <tr>
-                <td>{{ tasks.Task }}</td>
-                <td>{{ tasks.Deadline }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.deadline }}</td>
             </tr>
             {% endfor %}
         </table>

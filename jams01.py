@@ -27,9 +27,11 @@ def user():
 @app.route('/<project_id>')
 #View Project
 def project(project_id):
+    print(project_id)
     a_user =  db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
     my_project = db.session.query(Project).filter_by(id=project_id).one()
-    return render_template('view.html', project=my_project, user=a_user)
+    my_tasks = db.session.query(Task).filter_by(id=project_id).all()
+    return render_template('view.html', project=my_project, user=a_user, tasks=my_tasks)
 
 @app.route('/<project_id>/create')
 #Create task in project

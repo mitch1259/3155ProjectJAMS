@@ -2,6 +2,7 @@ from database import db
 
 class Task(db.Model):
 	id = db.Column("id", db.Integer, primary_key=True)
+	project_id = db.Column("project_id", db.Integer)
 	name = db.Column("name", db.String(200))
 	text = db.Column("text", db.String(200))
 	deadline = db.Column("deadline", db.String(50))
