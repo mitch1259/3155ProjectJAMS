@@ -19,3 +19,10 @@ class User(db.Model):
 	def __init__(self, name, email):
 		self.name = name
 		self.email = email
+
+class Project(db.Model):
+	id = db.Column("id", db.Integer, primary_key=True)
+	name = db.Column("name", db.String(100))
+
+	def __init__(self, name):
+		self.name = name

@@ -4,7 +4,7 @@
 import os                 # os is used to get environment variables IP & PORT
 from flask import Flask, render_template, request, redirect, url_for, session
 from database import db
-from models import Task as Task, User as User
+from models import Task as Task, User as User, Project as Project
 
 app = Flask(__name__)     # create an app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jams_note_app.db'
@@ -21,24 +21,27 @@ with app.app_context():
 #List Projects
 def user():
     a_user =  db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
-    return render_template('user.html', user=a_user)
+    my_projects = db.session.query(Project).all()
+    return render_template('user.html', user=a_user, projects=my_projects)
 
-@app.route('/tasks')
+@app.route('/<project_id>')
 #View Project
-def user_view():
-    return render_template('view.html', tasks=task, user=a_user)
+def project(project_id):
+    a_user =  db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
+    my_project = db.session.query(Project).filter_by(id=project_id).one()
+    return render_template('view.html', project=my_project, user=a_user)
 
-@app.route('/tasks/create')
+@app.route('/<project_id>/create')
 #Create task in project
 def create():
     return redirect(url_for('user'))
 
-@app.route('/tasks/edit')
+@app.route('/<project_id>/edit')
 #Edit task in project
 def edit():
     return redirect(url_for('user'))
 
-@app.route('/delete')
+@app.route('/<project_id>/delete')
 #Delete task in project
 def delete():
     return redirect(url_for('user'))
