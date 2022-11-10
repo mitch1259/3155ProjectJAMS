@@ -3,15 +3,15 @@
 # imports
 import os                 # os is used to get environment variables IP & PORT
 from flask import Flask, render_template, request, redirect, url_for, session
+from database import db
+from models import Task as Task, User as User
 
 app = Flask(__name__)     # create an app
-
-a_user = {'name': 'TestUser', 'email':'test@uncc.edu'}
-
-task = {1: {'Task': 'Order shipment', 'Details': 'Shipment of office supplies', 'CurrentDate': '10-01-2020', 'Deadline': '10-05-2020'},
-            2: {'Task': 'Train Robert about web app', 'Details': 'Teach the basics of web app and provide resources', 'CurrentDate': '10-02-2020', 'Deadline': '10-07-2020'},
-            3: {'Task': 'Create database', 'Details': 'Create updated database for new clients', 'CurrentDate': '10-11-2020', 'Deadline': '10-15-2020'}
-            }
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jams_note_app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 # @app.route is a decorator. It gives the function "index" special powers.
 # In this case it makes it so anyone going to "your-url/" makes this function
@@ -20,6 +20,7 @@ task = {1: {'Task': 'Order shipment', 'Details': 'Shipment of office supplies', 
 @app.route('/user')
 #List Projects
 def user():
+    a_user =  db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
     return render_template('user.html', user=a_user)
 
 @app.route('/tasks')
