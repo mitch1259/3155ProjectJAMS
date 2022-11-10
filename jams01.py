@@ -18,12 +18,29 @@ task = {1: {'Task': 'Order shipment', 'Details': 'Shipment of office supplies', 
 # get called. What it returns is what is shown as the web page
 @app.route('/')
 @app.route('/user')
+#List Projects
 def user():
     return render_template('user.html', user=a_user)
 
 @app.route('/tasks')
+#View Project
 def user_view():
     return render_template('view.html', tasks=task, user=a_user)
+
+@app.route('/tasks/create')
+#Create task in project
+def create():
+    return redirect(url_for('user'))
+
+@app.route('/tasks/edit')
+#Edit task in project
+def edit():
+    return redirect(url_for('user'))
+
+@app.route('/delete')
+#Delete task in project
+def delete():
+    return redirect(url_for('user'))
 
 @app.route('/clock')
 def clock():
