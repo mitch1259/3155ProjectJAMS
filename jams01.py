@@ -43,10 +43,10 @@ def create():
 def edit():
     return redirect(url_for('user'))
 
-@app.route('/<task_id>/delete')
+@app.route('/<task_id>/delete', methods=['POST'])
 #Delete task in project
 def delete(task_id):
-    task = db.session.query(Project).filter_by(id=task_id).one()
+    task = db.session.query(Task).filter_by(id=task_id).one()
     db.session.delete(task)
     db.session.commit()
     return redirect(url_for('user'))
