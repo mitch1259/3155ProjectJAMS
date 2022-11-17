@@ -23,6 +23,8 @@
                 <td>{{ task.name }}</td>
                 <td>{{ task.deadline }}</td>
                 <td>
+                    <td><a href="{{ url_for('edit', task_id=task.id, project_id=project.id) }}">Edit</a></td>
+                <td>
                     <form action="{{url_for('delete', task_id=task.id) }}" method="post">
                         <input type="submit" value="Delete">
                     </form>
@@ -30,5 +32,6 @@
             </tr>
             {% endfor %}
         </table>
+        <a href="{{ url_for('create', project_id=project.id) }}"> Add Task</a>
     </body>
 </html>

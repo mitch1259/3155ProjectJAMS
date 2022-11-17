@@ -10,8 +10,11 @@
     </head>
     <body>
         <h1>Welcome {{user.name}} to JAMS!</h1>
-
-        <form action="create" method="post">
+        {% if task %}
+            <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="post">
+        {% else %}
+            <form action="create" method="post">
+        {% endif %}
             <p><label>Task Name </label></p><p>  <input type="text" name="name"/></p>
             <p><label>Text</label></p><p>  <input type="text" name="text"/></p>
              <p><label>Task Deadline </label></p><p><input type="text" name="deadline"></p>

@@ -7,7 +7,8 @@ class Task(db.Model):
 	text = db.Column("text", db.String(200))
 	deadline = db.Column("deadline", db.String(50))
 
-	def __init__(self, name, text, deadline):
+	def __init__(self, project_id, name, text, deadline):
+		self.project_id = project_id
 		self.name = name
 		self.text = text
 		self.deadline = deadline

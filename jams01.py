@@ -33,15 +33,46 @@ def project(project_id):
     my_tasks = db.session.query(Task).filter_by(project_id=project_id).all()
     return render_template('view.html', project=my_project, user=a_user, tasks=my_tasks)
 
-@app.route('/<project_id>/create')
+@app.route('/<project_id>/create', methods=['GET', 'POST'])
 #Create task in project
-def create():
-    return redirect(url_for('user'))
+def create(project_id):
+    if request.method == 'POST':
+        project_id = project_id
+        name = request.form['name']
+        text = request.form['text']
+        deadline = request.form['deadline']
+        new_record = Task(project_id, name, text, deadline)
+        db.session.add(new_record)
+        db.session.commit()
+        return redirect(url_for('user'))
+    else:
+        a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu')
+        return render_template('create.html', user=a_user)
 
-@app.route('/<project_id>/edit')
+
+@app.route('/<project_id>/edit/<task_id>', methods=['GET', 'POST'])
 #Edit task in project
-def edit():
-    return redirect(url_for('user'))
+def edit(project_id, task_id):
+    if request.method == 'POST':
+        task_id = task_id
+        project_id = project_id
+        name = request.form['name']
+        text = request.form['text']
+        deadline = request.form['deadline']
+        task = db.session.query(Task).filter_by(id=task_id).one()
+        task.task_id = task_id
+        task.project_id = project_id
+        task.name = name
+        task.text = text
+        task.deadline = deadline
+        db.session.add(task)
+        db.session.commit()
+        return redirect(url_for('user'))
+    else:
+        a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
+        my_task = db.session.query(Task).filter_by(id=task_id).one()
+        my_project = db.session.query(Project).filter_by(id=project_id).one()
+        return render_template('create.html', task=my_task, project=my_project, user=a_user)
 
 @app.route('/<task_id>/delete', methods=['POST'])
 #Delete task in project
