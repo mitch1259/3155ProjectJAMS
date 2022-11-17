@@ -16,11 +16,13 @@
         <table>
             <tr>
                 <th>Task</th>
+                <th>Text</th>
                 <th>Deadline</th>
             </tr>
             {% for task in tasks %}
             <tr>
                 <td>{{ task.name }}</td>
+                <td>{{ task.text }}</td>
                 <td>{{ task.deadline }}</td>
                 <td>
                     <td><a href="{{ url_for('edit', task_id=task.id, project_id=project.id) }}">Edit</a></td>

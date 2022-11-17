@@ -44,7 +44,7 @@ def create(project_id):
         new_record = Task(project_id, name, text, deadline)
         db.session.add(new_record)
         db.session.commit()
-        return redirect(url_for('user'))
+        return redirect(url_for('.project', project_id=project_id))
     else:
         a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu')
         return render_template('create.html', user=a_user)
@@ -67,7 +67,7 @@ def edit(project_id, task_id):
         task.deadline = deadline
         db.session.add(task)
         db.session.commit()
-        return redirect(url_for('user'))
+        return redirect(url_for('.project', project_id=project_id))
     else:
         a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
         my_task = db.session.query(Task).filter_by(id=task_id).one()
@@ -78,9 +78,10 @@ def edit(project_id, task_id):
 #Delete task in project
 def delete(task_id):
     task = db.session.query(Task).filter_by(id=task_id).one()
+    project_id = task.project_id
     db.session.delete(task)
     db.session.commit()
-    return redirect(url_for('user'))
+    return redirect(url_for('.project', project_id=project_id))
 
 @app.route('/clock')
 def clock():
