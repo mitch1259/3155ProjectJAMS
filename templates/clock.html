@@ -9,6 +9,12 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('user') }}"> Home</a>
+            </nav>
+        </div>
+
         <h2>You are currently clocked (in/out)</h2>
 
         <nav> <a href="/clock"> Start/Stop Clock </a> </nav>

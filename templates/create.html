@@ -9,6 +9,13 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('user') }}"> Home</a>
+                <a href="{{ url_for('project', project_id=project.id) }}"> Project: {{ project.name }} </a>
+            </nav>
+        </div>
+
         <h1>Welcome {{user.name}} to JAMS!</h1>
         {% if task %}
             <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="post">

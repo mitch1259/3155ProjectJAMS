@@ -9,7 +9,13 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        <h1>Welcome {{user.name}} to the JAMS!</h1>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('user') }}"> Home</a>
+            </nav>
+        </div>
+
+        <h1>Welcome {{user.name}} to JAMS!</h1>
 
         <h2>Project Details</h2>
 
@@ -25,7 +31,10 @@
                 <td>{{ task.text }}</td>
                 <td>{{ task.deadline }}</td>
                 <td>
-                    <td><a href="{{ url_for('edit', task_id=task.id, project_id=project.id) }}">Edit</a></td>
+                    <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="get">
+                        <input type="submit" value="Edit">
+                    </form>
+                </td>
                 <td>
                     <form action="{{url_for('delete', task_id=task.id) }}" method="post">
                         <input type="submit" value="Delete">

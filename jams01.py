@@ -46,8 +46,9 @@ def create(project_id):
         db.session.commit()
         return redirect(url_for('.project', project_id=project_id))
     else:
-        a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu')
-        return render_template('create.html', user=a_user)
+        a_user = db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
+        my_project = db.session.query(Project).filter_by(id=project_id).one()
+        return render_template('create.html', user=a_user, project=my_project)
 
 
 @app.route('/<project_id>/edit/<task_id>', methods=['GET', 'POST'])
