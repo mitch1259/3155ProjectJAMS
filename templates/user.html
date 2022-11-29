@@ -10,12 +10,20 @@
     </head>
     <body>
         <div class="navdiv">
-            <nav>
-                <a href="{{ url_for('user') }}"> Home</a>
-            </nav>
+            {% if user %}
+                <nav>
+                    <a href="{{ url_for('logout') }}"> Logout</a>
+                </nav>
+            {% else %}
+                <nav>
+                    <a href="{{ url_for('login') }}">Sign In</a> ||
+                    <a href="{{ url_for('register') }}">Register</a>
+                </nav>
+            {% endif %}
         </div>
 
-        <h1>Welcome {{user.name}} to JAMS!</h1>
+
+        <h1>Welcome {{user}} to JAMS!</h1>
 
         <h2>Information for all projects you are part of can be found here</h2>
         {% for project in projects %}
