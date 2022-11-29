@@ -28,7 +28,7 @@ def user():
     #a_user =  db.session.query(User).filter_by(email='mmart196@uncc.edu').one()
     #my_projects = db.session.query(Project).filter_by(user_id=session['user_id']).all()
     if session.get('user'):
-        my_projects = db.session.query(Project).filter_by(user=session['user']).all()
+        my_projects = db.session.query(Project).all()
         return render_template("user.html", projects=my_projects, user=session['user'])
     return render_template('user.html')
 
@@ -39,6 +39,7 @@ def project(project_id):
     if session.get('user'):
         my_project = db.session.query(Project).filter_by(id=project_id).one()
         my_tasks = db.session.query(Task).filter_by(project_id=project_id).all()
+        print(user)
         return render_template('view.html', project=my_project, tasks=my_tasks, user=session['user'])
     else:
         return redirect(url_for('login'))

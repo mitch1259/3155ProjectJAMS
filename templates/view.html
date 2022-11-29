@@ -30,19 +30,24 @@
                 <td>{{ task.name }}</td>
                 <td>{{ task.text }}</td>
                 <td>{{ task.deadline }}</td>
-                <td>
-                    <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="get">
-                        <input type="submit" value="Edit">
-                    </form>
-                </td>
-                <td>
-                    <form action="{{url_for('delete', task_id=task.id) }}" method="post">
-                        <input type="submit" value="Delete">
-                    </form>
-                </td>
+                {% if user == task.user_id %}
+                    <td>
+                        <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="get">
+                            <input type="submit" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{{url_for('delete', task_id=task.id) }}" method="post">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
-        <a href="{{ url_for('create', project_id=project.id) }}"> Add Task</a>
+        {% if user == project.user %}
+            <a href="{{ url_for('create', project_id=project.id) }}"> Add Task</a>
+        {% endif %}
+
     </body>
 </html>
