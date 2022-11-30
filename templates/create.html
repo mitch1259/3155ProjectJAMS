@@ -18,7 +18,7 @@
             </nav>
         </div>
 
-        <h1>Welcome {{user}} to JAMS!</h1>
+        <h1>Add a New Task</h1>
         {% if task %}
             <form action="{{ url_for('edit', task_id=task.id, project_id=project.id) }}" method="post">
         {% else %}

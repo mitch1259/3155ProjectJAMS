@@ -29,8 +29,8 @@ def user():
     #my_projects = db.session.query(Project).filter_by(user_id=session['user_id']).all()
     if session.get('user'):
         my_projects = db.session.query(Project).all()
-        return render_template("user.html", projects=my_projects, user=session['user'])
-    return render_template('user.html')
+        return render_template("user.html", projects=my_projects, user=session['user'], usern=session['user_name'])
+    return redirect(url_for('login'))
 
 @app.route('/<project_id>')
 #View Project
@@ -141,7 +141,7 @@ def login():
     if login_form.validate_on_submit():
         the_user = db.session.query(User).filter_by(email=request.form['email']).one()
         if bcrypt.checkpw(request.form['password'].encode('utf-8'), the_user.password):
-            session['user'] = the_user.first_name
+            session['user_name'] = the_user.first_name
             session['user'] = the_user.id
             return redirect(url_for('user'))
 
