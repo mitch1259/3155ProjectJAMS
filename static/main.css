@@ -1,10 +1,40 @@
 body {
-    padding: 30px 30px;
+    padding: 10px 13px;
+    margin-bottom: 15px;
+    border-radius: 2px;
+    border: 1px solid #d4d9e3;
+    font-weight: 200;
+    color: #4d5060;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9em;
     }
+
 h1{
-    color:rgb(0, 81, 128);
+    text-align: center;
+    color: rgb(0,0,0);
+    margin-bottom: 3px;
+    display: block;
+    font-weight: 10000;
 }
 h2{
-    color:rgba(255, 255, 255, 0.78);
-    background:rgb(0, 81, 128);
+    text-align: center;
+    color: white;
+    background:rgb(0,0,0);
 }
+
+input[type="button"] {
+    background: rgb(252, 163, 17);
+    border: 0;
+    color: white;
+    border-radius: 2px;
+    margin-top: 15px;
+    font-weight: 400;
+    border: 1px solid rgb(252, 163, 17);
+    transition: all .3s ease-out;
+  }
+  
+  input[type="button"]:hover {
+    cursor: pointer;
+    background: white;
+    color: rgb(252, 163, 17);
+  }

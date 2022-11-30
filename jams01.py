@@ -156,7 +156,7 @@ def logout():
     if session.get('user'):
         session.clear()
 
-    return redirect(url_for('user'))
+    return redirect(url_for('login'))
 
 @app.route('/clock')
 def clock():

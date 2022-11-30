@@ -11,21 +11,13 @@
 </head>
     <body>
         <div class="navdiv">
-            {% if user %}
                 <nav>
-                    <a href="{{ url_for('logout') }}"> Logout</a>
+                   <form> <input type ="button" onclick="window.location.href='{{ url_for('register') }}';" value="Register" /> </form>
                 </nav>
-            {% else %}
-                <nav>
-                    <a href="{{ url_for('login') }}">Sign In</a> ||
-                    <a href="{{ url_for('register') }}">Register</a>
-                </nav>
-            {% endif %}
         </div>
 
-        <h1>Welcome {% if user %}{{user}}{% endif %}to JAMS!</h1>
-
         <div class="formwrapper">
+            <h2 class="title">Welcome to JAMS!</h2>
             <h2 class="title">Login</h2>
             <form method="POST" action="/login">
                 <div class="form-field">{{ form.email.label }} {{ form.email }}

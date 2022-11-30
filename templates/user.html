@@ -13,12 +13,12 @@
         <div class="navdiv">
             {% if user %}
                 <nav>
-                    <a href="{{ url_for('logout') }}"> Logout</a>
+                    <form> <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> </form>
                 </nav>
             {% else %}
                 <nav>
-                    <a href="{{ url_for('login') }}">Sign In</a> ||
-                    <a href="{{ url_for('register') }}">Register</a>
+                    <form> <input type ="button" onclick="window.location.href='{{ url_for('login') }}';" value="Login" />
+                     <input type ="button" onclick="window.location.href='{{ url_for('register') }}';" value="Register" /> </form>
                 </nav>
             {% endif %}
         </div>
@@ -28,10 +28,11 @@
 
         <h2>Information for all projects you are part of can be found here</h2>
         {% for project in projects %}
-            <nav> <a href="{{ url_for('project', project_id=project.id) }}"> {{ project.name }} </a> </nav>
+            <nav> <form action="{{ url_for('project', project_id=project.id) }}"> <input type="submit" value="{{project.name}}"> </form> </nav>
+            <br>
         {% endfor %}
 
-        <nav> <a href="/user/createproject"> Create Project </a> </nav>
+        <nav> <form action="/user/createproject"> <input type="submit" value="Create Project"> </form> </nav>
 
     </body>
 </html>

@@ -12,7 +12,8 @@
     <body>
         <div class="navdiv">
             <nav>
-                <a href="{{ url_for('user') }}"> Home</a>
+                <form> <input type ="button" onclick="window.location.href='{{ url_for('user') }}';" value="Home" /> 
+                <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> </form>
             </nav>
         </div>
 

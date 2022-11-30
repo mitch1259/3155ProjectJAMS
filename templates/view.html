@@ -12,7 +12,8 @@
     <body>
         <div class="navdiv">
             <nav>
-                <a href="{{ url_for('user') }}"> Home</a>
+                <form> <input type ="button" onclick="window.location.href='{{ url_for('user') }}';" value="Home" /> 
+                <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> </form>
             </nav>
         </div>
 
@@ -43,11 +44,12 @@
                         </form>
                     </td>
                 {% endif %}
+                <br>
             </tr>
             {% endfor %}
         </table>
         {% if user == project.user %}
-            <a href="{{ url_for('create', project_id=project.id) }}"> Add Task</a>
+            <form action="{{ url_for('create', project_id=project.id) }}"> <input type="submit" value="Add Task"> </form>
         {% endif %}
 
     </body>
