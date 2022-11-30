@@ -24,6 +24,7 @@ class User(db.Model):
 	email = db.Column("email", db.String(100))
 	password = db.Column(db.String(255), nullable=False)
 	registered_on = db.Column(db.DateTime, nullable=False)
+	clock = db.Column("clock", db.Integer)
 	tasks = db.relationship("Task", backref="user", lazy=True)
 
 
@@ -34,6 +35,7 @@ class User(db.Model):
 		self.email = email
 		self.password = password
 		self.registered_on = datetime.date.today()
+		self.clock = 2
 
 class Project(db.Model):
 	id = db.Column("id", db.Integer, primary_key=True)

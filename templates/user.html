@@ -13,7 +13,8 @@
         <div class="navdiv">
             {% if user %}
                 <nav>
-                    <form> <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> </form>
+                    <form> <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> 
+                    <input type ="button" onclick="window.location.href='{{ url_for('clock') }}';" value="Clock" /></form>
                 </nav>
             {% else %}
                 <nav>

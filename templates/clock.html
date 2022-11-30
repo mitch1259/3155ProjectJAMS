@@ -12,11 +12,14 @@
     <body>
         <div class="navdiv">
             <nav>
-                <a href="{{ url_for('user') }}"> Home</a>
+                <form> <input type ="button" onclick="window.location.href='{{ url_for('user') }}';" value="Home" /> 
+                <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /></form>
             </nav>
         </div>
 
-        <h2>You are currently clocked (in/out)</h2>
+        <h1>You are currently clocked {% if clock % 2 == 0 %}out{% else %}in{% endif %}</h1>
 
-        <nav> <a href="/clock"> Start/Stop Clock </a> </nav>
+        <nav> <form action="/clocklogic"> <input type="submit" value="Clock {% if clock % 2 == 0 %}in{% else %}out{% endif %}"> </form> </nav>
+    
+        <h2>You have logged {{display}} shifts</h2>
     </body>

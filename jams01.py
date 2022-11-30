@@ -130,8 +130,8 @@ def register():
         new_user = User(first_name, last_name, request.form['email'], h_password)
         db.session.add(new_user)
         db.session.commit()
-        session['user'] = first_name
-        session['user_id'] = new_user.id
+        session['user_name'] = first_name
+        session['user'] = new_user.id
         return redirect(url_for('user'))
     return render_template('register.html', form=form)
 
@@ -160,7 +160,27 @@ def logout():
 
 @app.route('/clock')
 def clock():
-    return render_template('clock.html')
+    if session.get('user'):
+        clock = db.session.query(User).filter_by(id=session['user']).one().clock
+        display = int((clock-2)/2)
+        return render_template("clock.html", clock=clock, display=display)
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/clocklogic')
+def clocklogic():
+    if session.get('user'):
+        curruser = db.session.query(User).filter_by(id=session['user']).one()
+        curruser.id = curruser.id
+        curruser.first_name = curruser.first_name
+        curruser.last_name = curruser.last_name
+        curruser.email = curruser.email
+        curruser.password = curruser.password
+        curruser.registered_on = curruser.registered_on
+        curruser.clock = curruser.clock + 1
+        db.session.add(curruser)
+        db.session.commit()
+        return redirect(url_for('clock'))
 
 
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
