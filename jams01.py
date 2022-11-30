@@ -181,6 +181,8 @@ def clocklogic():
         db.session.add(curruser)
         db.session.commit()
         return redirect(url_for('clock'))
+    else:
+        return redirect(url_for('login'))
 
 
 app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
