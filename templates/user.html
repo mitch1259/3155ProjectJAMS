@@ -7,6 +7,7 @@
         <title>JAMS Project Management</title>
         <!-- styles -->
         <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
     </head>
     <body>
         <div class="navdiv">
@@ -30,7 +31,7 @@
             <nav> <a href="{{ url_for('project', project_id=project.id) }}"> {{ project.name }} </a> </nav>
         {% endfor %}
 
-        <nav> <a href="/clock"> Clock In/Out </a> </nav>
+        <nav> <a href="/user/createproject"> Create Project </a> </nav>
 
     </body>
 </html>
