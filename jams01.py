@@ -65,6 +65,19 @@ def create(project_id):
     else:
         return redirect(url_for('login'))
 
+@app.route('/user/createproject', methods=['GET', 'POST'])
+def createproject():
+    if session.get('user'):
+        if request.method == 'POST':
+            name = request.form['name']
+            new_record = Project(name, session['user'])
+            db.session.add(new_record)
+            db.session.commit()
+            return redirect(url_for('user'))
+        else:
+            return render_template('projectcreate.html', user=session['user'])
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/<project_id>/edit/<task_id>', methods=['GET', 'POST'])
 #Edit task in project

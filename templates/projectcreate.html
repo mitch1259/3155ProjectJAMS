@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="JAMS Project Management">
+        <title>JAMS Project Management</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+    <body>
+        <div class="navdiv">
+            <nav>
+                <a href="{{ url_for('user') }}"> Home</a>
+            </nav>
+        </div>
+
+        <h1>Welcome {{user}} to JAMS!</h1>
+            <form action="createproject" method="post">
+            <p><label>Task Name </label></p><p>  <input type="text" name="name"/></p>
+             <p><input type="submit" value="Add Project"/></p>
+        </form>
+    </body>
+</html>
