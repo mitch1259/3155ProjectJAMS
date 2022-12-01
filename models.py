@@ -6,7 +6,7 @@ class Task(db.Model):
 	project_id = db.Column("project_id", db.Integer)
 	name = db.Column("name", db.String(200))
 	text = db.Column("text", db.String(200))
-	deadline = db.Column("deadline", db.String(50))
+	deadline = db.Column("deadline", db.String(10))
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
 
