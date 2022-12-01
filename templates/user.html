@@ -33,7 +33,7 @@
             <br>
         {% endfor %}
 
-        <nav> <form action="/user/createproject"> <input type="submit" value="Create Project"> </form> </nav>
+        <nav> <form> <input type ="button" onclick="window.location.href='{{ url_for('createproject') }}';" value="Create Project" />  </form> </nav>
 
     </body>
 </html>
