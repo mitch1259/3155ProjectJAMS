@@ -105,6 +105,25 @@ def edit(project_id, task_id):
     else:
         return redirect(url_for('login'))
 
+@app.route('/<project_id>/edit', methods=['GET', 'POST'])
+def editproject(project_id):
+    if session.get('user'):
+        if request.method == 'POST':
+            project_id = project_id
+            name = request.form['name']
+            project = db.session.query(Project).filter_by(id=project_id).one()
+            project.project_id = project_id
+            project.name = name
+            project.user = project.user
+            db.session.add(project)
+            db.session.commit()
+            return redirect(url_for('.project', project_id=project_id))
+        else:
+            project=db.session.query(Project).filter_by(id=project_id).one()
+            return render_template('editproject.html', project=project)
+    else:
+        return redirect(url_for('login'))
+
 @app.route('/<task_id>/delete', methods=['POST'])
 #Delete task in project
 def delete(task_id):

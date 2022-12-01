@@ -47,7 +47,16 @@
             {% endfor %}
         </table>
         {% if user == project.user %}
-            <form action="{{ url_for('create', project_id=project.id) }}"> <input type="submit" value="Add Task"> </form>
+        <table>
+            <tr>
+                <td>
+                    <form action="{{ url_for('create', project_id=project.id) }}"> <input type="submit" value="Add Task"></form>
+                </td>
+                <td>
+                    <form action="{{ url_for('editproject', project_id=project.id) }}"> <input type="submit" value="Edit Project"></form>
+                </td>
+            </tr>
+        </table>
         {% endif %}
 
     </body>

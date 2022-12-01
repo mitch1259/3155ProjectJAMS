@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="JAMS Project Management">
+        <title>JAMS Project Management</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+    </head>
+    <body>
+        <div class="navdiv">
+            <nav>
+                <form> <input type ="button" onclick="window.location.href='{{ url_for('user') }}';" value="Home" />
+                <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /> </form>
+            </nav>
+        </div>
+
+        <h1>Edit Project</h1>
+        {% if project %}
+            <form action="{{ url_for('editproject', project_id=project.id) }}" method="post">
+        {% else %}
+            <form action="create" method="post">
+        {% endif %}
+            <p><label>Project Name </label></p><p>  <input type="text" name="name"/></p>
+            <p><input type="submit" value="Edit Project"/></p>
+        </form>
+    </body>
+</html>
