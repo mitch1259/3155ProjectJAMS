@@ -124,6 +124,19 @@ def editproject(project_id):
     else:
         return redirect(url_for('login'))
 
+@app.route('/delete/<project_id>', methods=['GET'])
+def deleteproject(project_id):
+    if session.get('user'):
+        project = db.session.query(Project).filter_by(id=project_id).one()
+        tasks = db.session.query(Task).filter_by(project_id=project_id).all()
+        for i in tasks:
+            db.session.delete(i)
+        db.session.delete(project)
+        db.session.commit()
+        return redirect(url_for('user'))
+    else:
+        return redirect(url_for('login'))
+
 @app.route('/<task_id>/delete', methods=['POST'])
 #Delete task in project
 def delete(task_id):

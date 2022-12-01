@@ -55,6 +55,9 @@
                 <td>
                     <form action="{{ url_for('editproject', project_id=project.id) }}"> <input type="submit" value="Edit Project"></form>
                 </td>
+                <td>
+                    <form> <input type ="button" onclick="window.location.href='{{ url_for('deleteproject', project_id=project.id) }}';" value="Delete Project" /> </form>
+                </td>
             </tr>
         </table>
         {% endif %}
