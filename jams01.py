@@ -9,6 +9,9 @@ from forms import RegisterForm
 import bcrypt
 from flask import session
 from forms import LoginForm
+import json
+from flask_dance.contrib.github import make_github_blueprint, github
+import os
 
 app = Flask(__name__)     # create an app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jams_note_app.db'
@@ -17,11 +20,16 @@ app.config['SECRET_KEY'] = 'SE3155'
 db.init_app(app)
 with app.app_context():
     db.create_all()
+blueprint = make_github_blueprint(client_id='8253f47264e5b958d78d', client_secret='b2c4240987cdc9326a3c6a96f713c96a8acb6a87')
+app.register_blueprint(blueprint, url_prefix='/github_login')
+
+# Not Malicious!! In order to login with github, insecure
+# outside connections are made (Flask uses http)
+os.system("export OAUTHLIB_INSECURE_TRANSPORT=1")
 
 # @app.route is a decorator. It gives the function "index" special powers.
 # In this case it makes it so anyone going to "your-url/" makes this function
 # get called. What it returns is what is shown as the web page
-@app.route('/')
 @app.route('/user')
 #List Projects
 def user():
@@ -167,6 +175,30 @@ def register():
         return redirect(url_for('user'))
     return render_template('register.html', form=form)
 
+@app.route('/login/github')
+def github_login():
+    if not github.authorized:
+        return redirect(url_for('github.login'))
+    else:
+        print(github.get('/user'))
+        account_info = github.get('/user')
+        if account_info.ok:
+            account_info_json = account_info.json()
+            first_name = format(account_info_json['login'])
+            try:
+                user = db.session.query(User).filter_by(email=first_name).one()
+                session['user_name'] = user.first_name
+                session['user'] = user.id
+            except:
+                print("Error caught")
+                user = User(first_name, first_name, first_name, first_name)
+                db.session.add(user)
+                db.session.commit()
+                session['user_name'] = user.first_name
+                session['user'] = user.id
+            return redirect(url_for('user'))
+
+@app.route('/')
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     login_form = LoginForm()
