@@ -11,7 +11,6 @@ from flask import session
 from forms import LoginForm
 import json
 from flask_dance.contrib.github import make_github_blueprint, github
-import os
 
 app = Flask(__name__)     # create an app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jams_note_app.db'
@@ -22,10 +21,6 @@ with app.app_context():
     db.create_all()
 blueprint = make_github_blueprint(client_id='8253f47264e5b958d78d', client_secret='b2c4240987cdc9326a3c6a96f713c96a8acb6a87')
 app.register_blueprint(blueprint, url_prefix='/github_login')
-
-# Not Malicious!! In order to login with github, insecure
-# outside connections are made (Flask uses http)
-os.system("export OAUTHLIB_INSECURE_TRANSPORT=1")
 
 # @app.route is a decorator. It gives the function "index" special powers.
 # In this case it makes it so anyone going to "your-url/" makes this function
@@ -119,10 +114,11 @@ def editproject(project_id):
         if request.method == 'POST':
             project_id = project_id
             name = request.form['name']
+            owner = request.form['owner']
             project = db.session.query(Project).filter_by(id=project_id).one()
             project.project_id = project_id
             project.name = name
-            project.user = project.user
+            project.user = owner
             db.session.add(project)
             db.session.commit()
             return redirect(url_for('.project', project_id=project_id))
