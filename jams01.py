@@ -124,7 +124,7 @@ def editproject(project_id):
             return redirect(url_for('.project', project_id=project_id))
         else:
             project=db.session.query(Project).filter_by(id=project_id).one()
-            return render_template('editproject.html', project=project)
+            return render_template('editproject.html', project=project, user=session['user'])
     else:
         return redirect(url_for('login'))
 

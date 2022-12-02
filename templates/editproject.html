@@ -24,7 +24,7 @@
             <form action="create" method="post">
         {% endif %}
             <p><label>Project Name </label></p><p>  <input type="text" name="name"/></p>
-            <p><label>Project Owner's ID</label></p><p>  <input type="integer" name="owner"/></p>
+            <p><label>Project Owner's ID (Your ID: {{user}})</label></p><p>  <input type="integer" name="owner"/></p>
             <p><input type="submit" value="Edit Project"/></p>
         </form>
     </body>
