@@ -41,6 +41,7 @@ class Project(db.Model):
 	id = db.Column("id", db.Integer, primary_key=True)
 	name = db.Column("name", db.String(100))
 	user = db.Column("user", db.Integer)
+	comments = db.relationship("Comment", backref="note", cascade="all, delete-orphan", lazy=True)
 
 
 
@@ -48,3 +49,15 @@ class Project(db.Model):
 		self.name = name
 		self.user = user
 
+class Comment(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	date_posted = db.Column(db.DateTime, nullable=False)
+	content = db.Column(db.VARCHAR, nullable=False)
+	project = db.Column(db.Integer, db.ForeignKey("project.id"), nullable=False)
+	user = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+	def __init__(self, content, project, user):
+		self.date_posted = datetime.date.today()
+		self.content = content
+		self.project = project
+		self.user = user

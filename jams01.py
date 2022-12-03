@@ -4,11 +4,9 @@
 import os                 # os is used to get environment variables IP & PORT
 from flask import Flask, render_template, request, redirect, url_for, session
 from database import db
-from models import Task as Task, User as User, Project as Project
-from forms import RegisterForm
+from models import Task as Task, User as User, Project as Project, Comment as Comment
+from forms import RegisterForm, LoginForm, CommentForm
 import bcrypt
-from flask import session
-from forms import LoginForm
 import json
 from flask_dance.contrib.github import make_github_blueprint, github
 
@@ -38,11 +36,9 @@ def user():
 @app.route('/<project_id>')
 #View Project
 def project(project_id):
-    print(project_id)
     if session.get('user'):
         my_project = db.session.query(Project).filter_by(id=project_id).one()
         my_tasks = db.session.query(Task).filter_by(project_id=project_id).all()
-        print(user)
         return render_template('view.html', project=my_project, tasks=my_tasks, user=session['user'])
     else:
         return redirect(url_for('login'))
@@ -241,6 +237,23 @@ def clocklogic():
         db.session.add(curruser)
         db.session.commit()
         return redirect(url_for('clock'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/<project_id>/comment', methods=['POST', 'GET'])
+def comment(project_id):
+    if session.get('user'):
+        comment_form = CommentForm()
+        project = db.session.query(Project).filter_by(id=project_id).one()
+        # validate_on_submit only validates using POST
+        if comment_form.validate_on_submit():
+            # get comment data
+            comment_text = request.form['comment']
+            new_record = Comment(comment_text, project_id, session['user'])
+            db.session.add(new_record)
+            db.session.commit()
+            return redirect(url_for('.project', project_id=project_id))
+        return render_template("comment.html", project=project, form=comment_form)
     else:
         return redirect(url_for('login'))
 
