@@ -7,15 +7,18 @@ class Task(db.Model):
 	name = db.Column("name", db.String(200))
 	text = db.Column("text", db.String(200))
 	deadline = db.Column("deadline", db.String(10))
+	imageUrl = db.Column("imageUrl", db.String(200))
+
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
-
-	def __init__(self, project_id, name, text, deadline, user_id):
+	def __init__(self, project_id, name, text, deadline,  imageUrl, user_id):
 		self.project_id = project_id
 		self.name = name
 		self.text = text
 		self.deadline = deadline
+		self.imageUrl = imageUrl
 		self.user_id = user_id
+		
 
 class User(db.Model):
 	id = db.Column("id", db.Integer, primary_key=True)

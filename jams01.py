@@ -53,7 +53,8 @@ def create(project_id):
             name = request.form['name']
             text = request.form['text']
             deadline = request.form['deadline']
-            new_record = Task(project_id, name, text, deadline, session['user'])
+            imageUrl = request.form['imageUrl']
+            new_record = Task(project_id, name, text, deadline, imageUrl, session['user'])
             db.session.add(new_record)
             db.session.commit()
 
@@ -88,12 +89,14 @@ def edit(project_id, task_id):
             name = request.form['name']
             text = request.form['text']
             deadline = request.form['deadline']
+            imageUrl = request.form['imageUrl']
             task = db.session.query(Task).filter_by(id=task_id).one()
             task.task_id = task_id
             task.project_id = project_id
             task.name = name
             task.text = text
             task.deadline = deadline
+            task.imageUrl = imageUrl
             db.session.add(task)
             db.session.commit()
             return redirect(url_for('.project', project_id=project_id))
@@ -257,8 +260,8 @@ def comment(project_id):
     else:
         return redirect(url_for('login'))
 
-
-app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
+if __name__ == "__main__":
+    app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 
 # To see the web page in your web browser, go to the url,
 #   http://127.0.0.1:5000
