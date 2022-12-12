@@ -4,8 +4,8 @@ import requests
 class FlaskTest(unittest.TestCase):
 
     def test_user(self):
-        #s = FlaskTest.login()
-        response = requests.get("http://127.0.0.1:5000/user")
+        s = FlaskTest.login()
+        response = s.get("http://127.0.0.1:5000/user")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
         self.assertEqual('Welcome to JAMS' in response.text, True)
