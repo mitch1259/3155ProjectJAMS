@@ -4,6 +4,7 @@ import requests
 class FlaskTest(unittest.TestCase):
 
     def test_user(self):
+        #s = FlaskTest.login()
         response = requests.get("http://127.0.0.1:5000/user")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
@@ -22,17 +23,18 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(' <form method="POST" action="/login">' in response.text, True)
 
     def test_project(self):
-        response = requests.get("http://127.0.0.1:5000/2?")
+        s = FlaskTest.login()
+        response = s.get("http://127.0.0.1:5000/2")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
-        self.assertEqual('<h1>Project Details</h1>' in response.text, True)
+        self.assertEqual('Project Details' in response.text, True)
     
     def test_editproject(self):
         #editing the project
         response = requests.get("http://127.0.0.1:5000/1/edit")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
-        self.assertEqual('<form action="/1/edit" method="post">' in response.text, True)
+        self.assertEqual(response.text, True)
 
     def test_projectCreate(self):
         response = requests.get("http://127.0.0.1:5000/1?/create")
@@ -53,7 +55,7 @@ class FlaskTest(unittest.TestCase):
     #     self.assertEqual(' <form method="POST" action="/login">' in response.text, True)
     
     def test_clock(self):
-        response = requests.get("http://127.0.0.1:5000/clocklogic")
+        response = requests.get("http://127.0.0.1:5000/clock")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
         self.assertEqual('<h1>You are currently clocked</h1>' in response.text, True)
@@ -68,6 +70,12 @@ class FlaskTest(unittest.TestCase):
         response = requests.get('http://127.0.0.1:5000/delete/1')
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
+
+    def login():
+        payload = {'Email:' : 'mmart196@uncc.edu', 'Password:' : 'password'}
+        s = requests.Session()
+        s.post("http://127.0.0.1:5000/login", data=payload)
+        return s
 
 if __name__ == " __main__":
     unittest.main()
