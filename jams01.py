@@ -265,7 +265,7 @@ def calendar():
 
     if session.get('user'):
         my_projects = db.session.query(Project).all()
-        my_tasks = db.session.query(Task).all()
+        my_tasks = db.session.query(Task).order_by(Task.deadline).all()
 
         return render_template("calendar.html", projects=my_projects, tasks=my_tasks, user=session['user'], usern=session['user_name'])
     return redirect(url_for('login'))
