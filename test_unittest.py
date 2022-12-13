@@ -1,10 +1,16 @@
 import unittest
 import requests
 
+def login():
+        payload = {'Email:' : 'mmart196@uncc.edu', 'Password:' : 'password'}
+        s = requests.Session()
+        s.post("http://127.0.0.1:5000/login", data=payload)
+        return s
+
 class FlaskTest(unittest.TestCase):
 
     def test_user(self):
-        s = FlaskTest.login()
+        s = login()
         response = s.get("http://127.0.0.1:5000/user")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
@@ -23,7 +29,7 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(' <form method="POST" action="/login">' in response.text, True)
 
     def test_project(self):
-        s = FlaskTest.login()
+        s = login()
         response = s.get("http://127.0.0.1:5000/2")
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
@@ -70,12 +76,6 @@ class FlaskTest(unittest.TestCase):
         response = requests.get('http://127.0.0.1:5000/delete/1')
         statuscode = response.status_code
         self.assertEqual(statuscode, 200)
-
-    def login():
-        payload = {'Email:' : 'mmart196@uncc.edu', 'Password:' : 'password'}
-        s = requests.Session()
-        s.post("http://127.0.0.1:5000/login", data=payload)
-        return s
 
 if __name__ == " __main__":
     unittest.main()
