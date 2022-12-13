@@ -22,6 +22,7 @@
             <tr>
                 <td><h2>Task Name</h2></td>
                 <td><h2>Task Details</h2></td>
+                <td><h2>Project ID</h2></td>
                 <td><h2>Due Date</h2></td>
                 <td><h2>Actions Available</h2></td>
             <tr>
@@ -29,7 +30,8 @@
                 <tr>
                         <td>{{ task.name }}</td>
                         <td>{{ task.text }}</td>
-                        <td> {{ task.deadline }}</td>
+                        <td>{{ task.project_id }}</td>
+                        <td>{{ task.deadline }}</td>
                         <td>
                             {% if user == task.user_id %}
                             <form action="{{ url_for('edit', task_id=task.id, project_id=task.project_id) }}" method="get">

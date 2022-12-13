@@ -41,10 +41,11 @@ input[type="button"] {
   }
 
   .calendar{
-    background-color: rgb(252, 163, 17);
     color: black;
+    align-items: center;
   }
   .calendar td{
+    background-color: rgb(252, 163, 17);
     outline:auto;
     text-align: center;
   }
