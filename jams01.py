@@ -260,6 +260,17 @@ def comment(project_id):
     else:
         return redirect(url_for('login'))
 
+@app.route('/calendar')
+def calendar():
+
+    if session.get('user'):
+        my_projects = db.session.query(Project).all()
+        my_tasks = db.session.query(Task).all()
+
+        return render_template("calendar.html", projects=my_projects, tasks=my_tasks, user=session['user'], usern=session['user_name'])
+    return redirect(url_for('login'))
+
+
 if __name__ == "__main__":
     app.run(host=os.getenv('IP', '127.0.0.1'),port=int(os.getenv('PORT', 5000)),debug=True)
 

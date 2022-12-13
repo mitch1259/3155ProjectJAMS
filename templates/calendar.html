@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="JAMS Project Management">
+        <title>JAMS Project Management</title>
+        <!-- styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+    </head>
+    <body>
+        <div class="navdiv">
+            <nav>
+                <form> <input type ="button" onclick="window.location.href='{{ url_for('user') }}';" value="Home" /> 
+                <input type ="button" onclick="window.location.href='{{ url_for('logout') }}';" value="Logout" /></form>
+            </nav>
+        </div>
+        <h1>Scheduled Tasks</h1>
+        <div class="calendar">
+        <table>
+            <tr>
+                <td><h2>Task Name</h2></td>
+                <td><h2>Task Details</h2></td>
+                <td><h2>Due Date</h2></td>
+                <td><h2>Actions Available</h2></td>
+            <tr>
+                {% for task in tasks %}
+                <tr>
+                        <td>{{ task.name }}</td>
+                        <td>{{ task.text }}</td>
+                        <td> {{ task.deadline }}</td>
+                        <td>
+                            {% if user == task.user_id %}
+                            <form action="{{ url_for('edit', task_id=task.id, project_id=task.project_id) }}" method="get">
+                                <input type="submit" value="Edit">
+                            </form>
+                            <form action="{{url_for('delete', task_id=task.id) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                            {% else %}
+                            No Actions Available
+                            {% endif %}
+                        </td>
+                </tr>
+                {% endfor %}
+        </table>
+        </div>
+    </body>

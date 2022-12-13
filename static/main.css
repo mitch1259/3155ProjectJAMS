@@ -39,3 +39,24 @@ input[type="button"] {
     background: white;
     color: rgb(252, 163, 17);
   }
+
+  .calendar{
+    background-color: rgb(252, 163, 17);
+    color: black;
+  }
+  .calendar td{
+    outline:auto;
+    text-align: center;
+  }
+  .calendar table{
+    padding-left: 250px;
+
+  }
+  .calendar form{
+    background-color: rgb(252, 163, 17);
+    color: black;
+    display: inline;
+  }
+  .calendar h2{
+    border-radius: 0;
+  }
