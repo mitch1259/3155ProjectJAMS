@@ -17,7 +17,7 @@ app.config['SECRET_KEY'] = 'SE3155'
 db.init_app(app)
 with app.app_context():
     db.create_all()
-blueprint = make_github_blueprint(client_id='8253f47264e5b958d78d', client_secret='b2c4240987cdc9326a3c6a96f713c96a8acb6a87')
+blueprint = make_github_blueprint(client_id='', client_secret='') #These are deleted now
 app.register_blueprint(blueprint, url_prefix='/github_login')
 
 # @app.route is a decorator. It gives the function "index" special powers.
